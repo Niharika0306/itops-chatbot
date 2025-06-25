@@ -1,4 +1,7 @@
-.App {
+@use "@carbon/react/scss/spacing" as *;
+@use "@carbon/react/scss/theme" as *;
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +38,24 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.app-main-content {
+  padding-top: $spacing-07;
+  padding-right: $spacing-07;
+  padding-left: $spacing-07;
+  min-height: 100vh;
+  overflow-y: auto;
 }
+
+.fullScreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: calc(100vw - 320px - 2rem);
+  /* z-index: 9999; */
+}
+
+
+
