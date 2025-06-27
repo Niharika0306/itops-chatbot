@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// const API_URL = "http://localhost:3001/v1/chat/completions";
-// const MODEL = "gpt-3.5-turbo";
-
 async function customSendMessage(request, _options, instance) {
   const userInput = request.input.text;
 
@@ -16,7 +13,11 @@ async function customSendMessage(request, _options, instance) {
     });
 
     const replyText = response.data?.choices?.[0]?.message?.content;
+    // const docs = response.data?.docs || [];
+    const docs = [{"name": "Doc 1", "link": "https://www.ibm.com/docs/en/power10/9105-22A?topic=overview-hmc-operations"},
+       {"name": "Doc 2", "link": "https://www.ibm.com/docs/en/power10/9105-22A?topic=overview-hmc-operations"}]
 
+    // Main text response
     instance.messaging.addMessage({
       output: {
         generic: [
@@ -24,11 +25,20 @@ async function customSendMessage(request, _options, instance) {
             response_type: "text",
             text: replyText || "No response received.",
           },
+          {
+            response_type: "user_defined",
+            user_defined: {
+              user_defined_type: "reference_docs_button",
+              docs,
+              original_text: replyText,
+              button_label: "Get reference documents",
+            },
+          },
         ],
       },
     });
   } catch (err) {
-    console.error("Error calling backend:", err);
+    console.error("Error contacting RAG server:", err);
     instance.messaging.addMessage({
       output: {
         generic: [

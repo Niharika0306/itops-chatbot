@@ -19,12 +19,12 @@ import { renderUserDefinedResponse } from "./renderUserDefinedResponse.js";
 const config = {
   messaging: {
     customSendMessage,
-    // customLoadHistory,
+    customLoadHistory
   },
-  // headerConfig: {
-  //   hideMinimizeButton: true,
-  //   minimizeButtonIconType: undefined,
-  // },
+  headerConfig: {
+    hideMinimizeButton: true,
+    minimizeButtonIconType: undefined,
+  },
   themeConfig: {
     corners: CornersType.SQUARE,
   },
@@ -41,6 +41,17 @@ function App() {
   function onBeforeRender(instance) {
     instance.on({ type: BusEventType.FEEDBACK, handler: feedbackHandler });
     setChatInstance(instance);
+
+    instance.messaging.addMessage({
+      output: {
+        generic: [
+          {
+            response_type: "text",
+            text: "Hi, I’m your IT Support Assistant! Ask me anything about IBM systems.",
+          },
+        ],
+      },
+    });
   }
 
   function feedbackHandler(event) {

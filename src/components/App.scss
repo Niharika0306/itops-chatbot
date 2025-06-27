@@ -1,45 +1,6 @@
 @use "@carbon/react/scss/spacing" as *;
 @use "@carbon/react/scss/theme" as *;
 
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 .app-main-content {
   padding-top: $spacing-07;
   padding-right: $spacing-07;
@@ -50,8 +11,10 @@
 
 .fullScreen {
   position: fixed;
-  top: 0;
-  right: 0;
+  padding-top: 4rem;
+  padding-right: 30rem;
+  padding-left: 5rem;
+  padding-bottom: 10rem;
   height: 100vh;
   width: calc(100vw - 320px - 2rem);
   /* z-index: 9999; */
