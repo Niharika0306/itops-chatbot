@@ -4,18 +4,24 @@ async function customSendMessage(request, _options, instance) {
   const userInput = request.input.text;
 
   try {
-    const response = await axios.post('http://localhost:3001/v1/chat/completions',  {
-      messages: [
-        { role: "system", content: "You are a WatsonX assistant." },
-        { role: "user", content: userInput },
-      ],
-      endpointKey: "watsonx"
+    // const response = await axios.post('http://localhost:3001/v1/chat/completions',  {
+    //   messages: [
+    //     { role: "system", content: "You are a WatsonX assistant." },
+    //     { role: "user", content: userInput },
+    //   ],
+    //   endpointKey: "watsonx"
+    // });
+
+    const backup_prompt = "Is LPM supported accross data centers?"
+    const response = await axios.post('http://localhost:3001/generate',  {
+      message: userInput ? userInput : backup_prompt,
     });
 
-    const replyText = response.data?.choices?.[0]?.message?.content;
-    // const docs = response.data?.docs || [];
-    const docs = [{"name": "Doc 1", "link": "https://www.ibm.com/docs/en/power10/9105-22A?topic=overview-hmc-operations"},
-       {"name": "Doc 2", "link": "https://www.ibm.com/docs/en/power10/9105-22A?topic=overview-hmc-operations"}]
+    // const replyText = response.data?.choices?.[0]?.message?.content;
+    const replyText = response.data?.response || " ";
+    const docs = response.data?.documents?.results || [];
+    // const docs = [{"name": "Doc 1", "link": "https://www.ibm.com/docs/en/power10/9105-22A?topic=overview-hmc-operations"},
+    //    {"name": "Doc 2", "link": "https://www.ibm.com/docs/en/power10/9105-22A?topic=overview-hmc-operations"}]
 
     // Main text response
     instance.messaging.addMessage({

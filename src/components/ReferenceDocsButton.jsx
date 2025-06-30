@@ -20,10 +20,8 @@ function ReferenceDocsButton({ data }) {
           <div style={{ display: "grid", gap: "1rem" }}>
             {data.docs.map((doc, index) => (
               <Tile key={index}>
-                <p><strong>{doc.name}</strong></p>
-                <Link href={doc.link} target="_blank" rel="noopener noreferrer">
-                  View Document
-                </Link>
+                <p><strong>{doc.metadata.source}</strong></p>
+                <p>{doc.page_content}</p> 
               </Tile>
             ))}
           </div>
